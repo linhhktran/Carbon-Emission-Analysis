@@ -219,3 +219,12 @@ Table 'countries'
 | 27 | United Kingdom | 
 | 28 | USA            | 
 
+
+
+select *
+from product_emissions
+group by id
+having count(id) = 1
+
+
+not like
