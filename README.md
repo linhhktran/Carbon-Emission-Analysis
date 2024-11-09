@@ -1042,3 +1042,36 @@
 | 9792-2-2017   | 81         | 27         | 19                | 2017 | Three-way Catalyst for gasoline-powered passenger car exhaust                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 2            | 63                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | 
 
 
+Table "industry_group"
+| id | industry_group                                                         | 
+| -: | ---------------------------------------------------------------------: | 
+| 1  | "Consumer Durables, Household and Personal Products"                   | 
+| 2  | "Food, Beverage & Tobacco"                                             | 
+| 3  | "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 
+| 4  | "Mining - Iron, Aluminum, Other Metals"                                | 
+| 5  | "Pharmaceuticals, Biotechnology & Life Sciences"                       | 
+| 6  | "Textiles, Apparel, Footwear and Luxury Goods"                         | 
+| 7  | Automobiles & Components                                               | 
+| 8  | Capital Goods                                                          | 
+| 9  | Chemicals                                                              | 
+| 10 | Commercial & Professional Services                                     | 
+| 11 | Consumer Durables & Apparel                                            | 
+| 12 | Containers & Packaging                                                 | 
+| 13 | Electrical Equipment and Machinery                                     | 
+| 14 | Energy                                                                 | 
+| 15 | Food & Beverage Processing                                             | 
+| 16 | Food & Staples Retailing                                               | 
+| 17 | Gas Utilities                                                          | 
+| 18 | Household & Personal Products                                          | 
+| 19 | Materials                                                              | 
+| 20 | Media                                                                  | 
+| 21 | Retailing                                                              | 
+| 22 | Semiconductors & Semiconductor Equipment                               | 
+| 23 | Semiconductors & Semiconductors Equipment                              | 
+| 24 | Software & Services                                                    | 
+| 25 | Technology Hardware & Equipment                                        | 
+| 26 | Telecommunication Services                                             | 
+| 27 | Tires                                                                  | 
+| 28 | Tobacco                                                                | 
+| 29 | Trading Companies & Distributors and Commercial Services & Supplies    | 
+| 30 | Utilities                                                              | 
