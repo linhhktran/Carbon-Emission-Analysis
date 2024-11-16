@@ -1,10 +1,18 @@
-# Carbon-Emission-Analysis
+# PROJECT: Carbon Emission Analysis
+*This is an educational project on data analysis using SQL.*
 
-Objective: 
+**OBJECTIVE:** This project aims to analyze carbon emissions to examine the carbon footprint across various industries using SQL. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                      
+![image](https://permutable.ai/wp-content/uploads/2023/02/evening-view-industrial-landscape-city-with-smoke-emissions-from-chimneys-sunset-inscription-co2.jpg)
 
-Table 'industry_group'
+**DATA SOURCE: WHERE OUR DATA COMES FROM**
+
+Our dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
+
+**ALL TABLES WE GOT**
+
+**1. Table 'industry_group'**
+   
 | id | industry_group                                                         | 
 | -: | ---------------------------------------------------------------------: | 
 | 1  | "Consumer Durables, Household and Personal Products"                   | 
@@ -38,7 +46,8 @@ Table 'industry_group'
 | 29 | Trading Companies & Distributors and Commercial Services & Supplies    | 
 | 30 | Utilities                                                              | 
 
-Table 'companies'
+**2. Table 'companies'**
+
 | id  | company_name                                   | 
 | --: | ---------------------------------------------: | 
 | 1   | "Autodesk, Inc."                               | 
@@ -187,7 +196,8 @@ Table 'companies'
 | 144 | Xerox Corporation                              | 
 | 145 | ZHEJIANG WANFENG AUTO WHEEL CO LTD             | 
 
-Table 'countries'
+**3. Table 'countries'**
+
 | id | country_name   | 
 | -: | -------------: | 
 | 1  | Australia      | 
@@ -230,6 +240,8 @@ having count(*) = 1
 
 
 question 1
+
+``` sql
 SELECT 
     product_name,
     SUM(carbon_footprint_pcf) AS total_emissions
@@ -237,7 +249,7 @@ FROM product_emissions
 GROUP BY product_name
 ORDER BY total_emissions DESC
 LIMIT 10
-
+```
 | product_name                                                                                                                       | total_emissions | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats                                                                                                       | 3718044         | 
@@ -252,6 +264,7 @@ LIMIT 10
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | 100621          | 
 
 question 2
+``` sqp
 SELECT 
     pe.product_name,
     ig.industry_group,
@@ -261,7 +274,8 @@ LEFT JOIN industry_groups ig
 ON pe.industry_group_id = ig.id
 GROUP BY pe.product_name, ig.industry_group
 ORDER BY total_emissions DESC
-LIMIT 10;
+LIMIT 10
+```
 
 | product_name                                                                                                                       | industry_group                     | total_emissions | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------: | --------------: | 
@@ -277,6 +291,8 @@ LIMIT 10;
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | Automobiles & Components           | 100621          | 
 
 question 3
+
+``` sql
 SELECT 
     ig.industry_group,
     SUM(pe.carbon_footprint_pcf) AS total_emissions
@@ -284,6 +300,7 @@ FROM product_emissions pe
 LEFT JOIN industry_groups ig ON pe.industry_group_id = ig.id
 GROUP BY ig.industry_group
 ORDER BY total_emissions DESC
+```
 
 | industry_group                                                         | total_emissions | 
 | ---------------------------------------------------------------------: | --------------: | 
@@ -319,6 +336,7 @@ ORDER BY total_emissions DESC
 | Household & Personal Products                                          | 0               | 
 
 question 4
+``` sql
 SELECT 
     c.company_name,
     SUM(pe.carbon_footprint_pcf) AS total_emissions
@@ -327,6 +345,7 @@ LEFT JOIN companies c ON pe.company_id = c.id
 GROUP BY c.company_name
 ORDER BY total_emissions DESC
 LIMIT 10
+```
 
 | company_name                            | total_emissions | 
 | --------------------------------------: | --------------: | 
@@ -342,6 +361,7 @@ LIMIT 10
 | "Daikin Industries, Ltd."               | 105600          | 
 
 question 5
+``` sql
 SELECT 
     co.country_name,
     SUM(pe.carbon_footprint_pcf) AS total_emissions
@@ -350,6 +370,7 @@ LEFT JOIN countries co ON pe.country_id = co.id
 GROUP BY co.country_name
 ORDER BY total_emissions DESC
 LIMIT 10
+```
 
 | country_name | total_emissions | 
 | -----------: | --------------: | 
@@ -365,12 +386,14 @@ LIMIT 10
 | India        | 24574           | 
 
 question 6
+``` sql
 SELECT 
     year,
     SUM(carbon_footprint_pcf) AS total_emissions
 FROM product_emissions
 GROUP BY year
 ORDER BY year ASC;
+```
 
 | year | total_emissions | 
 | ---: | --------------: | 
@@ -382,6 +405,7 @@ ORDER BY year ASC;
 
 question 7
 
+``` sql
 WITH yearly_emissions AS (
     SELECT 
         pe.industry_group_id,
@@ -407,6 +431,7 @@ SELECT
     emission_change
 FROM emission_change
 ORDER BY emission_change ASC;
+```
 
 | industry_group                                                         | emission_change | 
 | ---------------------------------------------------------------------: | --------------: | 
