@@ -275,3 +275,168 @@ LIMIT 10;
 | Electric Motor                                                                                                                     | Capital Goods                      | 140647          | 
 | Audi A6                                                                                                                            | Automobiles & Components           | 111282          | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | Automobiles & Components           | 100621          | 
+
+question 3
+SELECT 
+    ig.industry_group,
+    SUM(pe.carbon_footprint_pcf) AS total_emissions
+FROM product_emissions pe
+LEFT JOIN industry_groups ig ON pe.industry_group_id = ig.id
+GROUP BY ig.industry_group
+ORDER BY total_emissions DESC
+
+| industry_group                                                         | total_emissions | 
+| ---------------------------------------------------------------------: | --------------: | 
+| Electrical Equipment and Machinery                                     | 9801558         | 
+| Automobiles & Components                                               | 2582264         | 
+| Materials                                                              | 577595          | 
+| Technology Hardware & Equipment                                        | 363776          | 
+| Capital Goods                                                          | 258712          | 
+| "Food, Beverage & Tobacco"                                             | 111131          | 
+| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 72486           | 
+| Chemicals                                                              | 62369           | 
+| Software & Services                                                    | 46544           | 
+| Media                                                                  | 23017           | 
+| Energy                                                                 | 10774           | 
+| "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 8909            | 
+| "Mining - Iron, Aluminum, Other Metals"                                | 8181            | 
+| Consumer Durables & Apparel                                            | 7309            | 
+| Commercial & Professional Services                                     | 5265            | 
+| Containers & Packaging                                                 | 2988            | 
+| Tires                                                                  | 2022            | 
+| Food & Staples Retailing                                               | 1481            | 
+| "Consumer Durables, Household and Personal Products"                   | 931             | 
+| Telecommunication Services                                             | 418             | 
+| "Textiles, Apparel, Footwear and Luxury Goods"                         | 387             | 
+| Utilities                                                              | 244             | 
+| Trading Companies & Distributors and Commercial Services & Supplies    | 239             | 
+| Food & Beverage Processing                                             | 141             | 
+| Gas Utilities                                                          | 122             | 
+| Semiconductors & Semiconductor Equipment                               | 54              | 
+| Retailing                                                              | 30              | 
+| Semiconductors & Semiconductors Equipment                              | 3               | 
+| Tobacco                                                                | 1               | 
+| Household & Personal Products                                          | 0               | 
+
+question 4
+SELECT 
+    c.company_name,
+    SUM(pe.carbon_footprint_pcf) AS total_emissions
+FROM product_emissions pe
+LEFT JOIN companies c ON pe.company_id = c.id
+GROUP BY c.company_name
+ORDER BY total_emissions DESC
+LIMIT 10
+
+| company_name                            | total_emissions | 
+| --------------------------------------: | --------------: | 
+| "Gamesa Corporación Tecnológica, S.A."  | 9778464         | 
+| Daimler AG                              | 1594300         | 
+| Volkswagen AG                           | 655960          | 
+| "Mitsubishi Gas Chemical Company, Inc." | 212016          | 
+| "Hino Motors, Ltd."                     | 191687          | 
+| Arcelor Mittal                          | 167007          | 
+| Weg S/A                                 | 160655          | 
+| General Motors Company                  | 137007          | 
+| "Lexmark International, Inc."           | 132012          | 
+| "Daikin Industries, Ltd."               | 105600          | 
+
+question 5
+SELECT 
+    co.country_name,
+    SUM(pe.carbon_footprint_pcf) AS total_emissions
+FROM product_emissions pe
+LEFT JOIN countries co ON pe.country_id = co.id
+GROUP BY co.country_name
+ORDER BY total_emissions DESC
+LIMIT 10
+
+| country_name | total_emissions | 
+| -----------: | --------------: | 
+| Spain        | 9786130         | 
+| Germany      | 2251225         | 
+| Japan        | 653237          | 
+| USA          | 518381          | 
+| South Korea  | 186965          | 
+| Brazil       | 169337          | 
+| Luxembourg   | 167007          | 
+| Netherlands  | 70417           | 
+| Taiwan       | 62875           | 
+| India        | 24574           | 
+
+question 6
+SELECT 
+    year,
+    SUM(carbon_footprint_pcf) AS total_emissions
+FROM product_emissions
+GROUP BY year
+ORDER BY year ASC;
+
+| year | total_emissions | 
+| ---: | --------------: | 
+| 2013 | 503857          | 
+| 2014 | 624226          | 
+| 2015 | 10840415        | 
+| 2016 | 1640182         | 
+| 2017 | 340271          | 
+
+question 7
+
+WITH yearly_emissions AS (
+    SELECT 
+        pe.industry_group_id,
+        ig.industry_group,
+        pe.year,
+        SUM(pe.carbon_footprint_pcf) AS total_emissions
+    FROM product_emissions pe
+    JOIN industry_groups ig ON pe.industry_group_id = ig.id
+    GROUP BY pe.industry_group_id, ig.industry_group, pe.year
+),
+emission_change AS (
+    SELECT 
+        industry_group_id,
+        industry_group,
+        MAX(total_emissions) AS max_emissions,
+        MIN(total_emissions) AS min_emissions,
+        (MAX(total_emissions) - MIN(total_emissions)) AS emission_change
+    FROM yearly_emissions
+    GROUP BY industry_group_id, industry_group
+)
+SELECT 
+    industry_group,
+    emission_change
+FROM emission_change
+ORDER BY emission_change ASC;
+
+| industry_group                                                         | emission_change | 
+| ---------------------------------------------------------------------: | --------------: | 
+| Automobiles & Components                                               | 1274644         | 
+| Technology Hardware & Equipment                                        | 165795          | 
+| Materials                                                              | 137459          | 
+| "Food, Beverage & Tobacco"                                             | 100289          | 
+| Capital Goods                                                          | 91444           | 
+| Software & Services                                                    | 22850           | 
+| Energy                                                                 | 9274            | 
+| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 7944            | 
+| Media                                                                  | 7837            | 
+| Commercial & Professional Services                                     | 2413            | 
+| Consumer Durables & Apparel                                            | 2118            | 
+| Food & Staples Retailing                                               | 771             | 
+| Telecommunication Services                                             | 131             | 
+| Semiconductors & Semiconductor Equipment                               | 46              | 
+| Retailing                                                              | 8               | 
+| Gas Utilities                                                          | 0               | 
+| Electrical Equipment and Machinery                                     | 0               | 
+| "Mining - Iron, Aluminum, Other Metals"                                | 0               | 
+| Tires                                                                  | 0               | 
+| Household & Personal Products                                          | 0               | 
+| Chemicals                                                              | 0               | 
+| Semiconductors & Semiconductors Equipment                              | 0               | 
+| Tobacco                                                                | 0               | 
+| "Consumer Durables, Household and Personal Products"                   | 0               | 
+| Food & Beverage Processing                                             | 0               | 
+| "Textiles, Apparel, Footwear and Luxury Goods"                         | 0               | 
+| Trading Companies & Distributors and Commercial Services & Supplies    | 0               | 
+| Utilities                                                              | 0               | 
+| Containers & Packaging                                                 | 0               | 
+| "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 0               | 
