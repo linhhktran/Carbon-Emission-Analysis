@@ -1,8 +1,0 @@
-
-``` sql
-select *
-from product_emissions
-where upstream_percent_total_pcf not like '%N/A%'
-group by id
-having count(*) = 1
-```
