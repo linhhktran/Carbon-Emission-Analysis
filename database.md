@@ -1,6 +1,6 @@
 # CARBON EMISSION DATABASE
 
-Using following query to remove duplicates and missing values:
+Using following query to filter out duplicates and missing values:
 ``` sql
 select *
 from product_emissions
