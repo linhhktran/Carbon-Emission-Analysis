@@ -220,11 +220,58 @@ Table 'countries'
 | 28 | USA            | 
 
 
-
+data mining, lọc data
 select *
 from product_emissions
+where upstream_percent_total_pcf not like '%N/A%'
 group by id
-having count(id) = 1
+having count(*) = 1
 
 
-not like
+
+question 1
+SELECT 
+    product_name,
+    SUM(carbon_footprint_pcf) AS total_emissions
+FROM product_emissions
+GROUP BY product_name
+ORDER BY total_emissions DESC
+LIMIT 10
+
+| product_name                                                                                                                       | total_emissions | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | --------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | 3718044         | 
+| Wind Turbine G132 5 Megawats                                                                                                       | 3276187         | 
+| Wind Turbine G114 2 Megawats                                                                                                       | 1532608         | 
+| Wind Turbine G90 2 Megawats                                                                                                        | 1251625         | 
+| TCDE                                                                                                                               | 198150          | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | 191687          | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | 167000          | 
+| Electric Motor                                                                                                                     | 160655          | 
+| Audi A6                                                                                                                            | 111282          | 
+| Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | 100621          | 
+
+question 2
+SELECT 
+    pe.product_name,
+    ig.industry_group,
+	SUM(pe.carbon_footprint_pcf) AS total_emissions
+FROM product_emissions pe
+LEFT JOIN industry_groups ig 
+ON pe.industry_group_id = ig.id
+GROUP BY pe.product_name, ig.industry_group
+ORDER BY total_emissions DESC
+LIMIT 10;
+
+| product_name                                                                                                                       | industry_group                     | total_emissions | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------: | --------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3718044         | 
+| Wind Turbine G132 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3276187         | 
+| Wind Turbine G114 2 Megawats                                                                                                       | Electrical Equipment and Machinery | 1532608         | 
+| Wind Turbine G90 2 Megawats                                                                                                        | Electrical Equipment and Machinery | 1251625         | 
+| TCDE                                                                                                                               | Materials                          | 198150          | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | Automobiles & Components           | 191687          | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | Materials                          | 167000          | 
+| Electric Motor                                                                                                                     | Capital Goods                      | 140647          | 
+| Audi A6                                                                                                                            | Automobiles & Components           | 111282          | 
+| Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | Automobiles & Components           | 100621          | 
