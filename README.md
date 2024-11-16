@@ -231,12 +231,13 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 
 
 data mining, lọc data
+``` sql
 select *
 from product_emissions
 where upstream_percent_total_pcf not like '%N/A%'
 group by id
 having count(*) = 1
-
+``` sql
 
 
 question 1
