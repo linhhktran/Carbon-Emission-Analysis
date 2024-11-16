@@ -1,15 +1,16 @@
 # PROJECT: Carbon Emission Analysis
 *This is an educational project on data analysis using SQL.*
 
-**OBJECTIVE:** This project aims to analyze carbon emissions to examine the carbon footprint across various industries using SQL. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
+## Objective
+This project aims to analyze carbon emissions to examine the carbon footprint across various industries using SQL. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
 
 ![image](https://permutable.ai/wp-content/uploads/2023/02/evening-view-industrial-landscape-city-with-smoke-emissions-from-chimneys-sunset-inscription-co2.jpg)
 
-**DATA SOURCE: WHERE OUR DATA COMES FROM**
+## DATA SOURCE: WHERE OUR DATA COMES FROM
 
 Our dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
 
-**ALL TABLES WE GOT**
+## TABLES INFORMATION
 
 **1. Table 'industry_group'**
    
@@ -229,17 +230,8 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 | 27 | United Kingdom | 
 | 28 | USA            | 
 
-
-data mining, lọc data
-``` sql
-select *
-from product_emissions
-where upstream_percent_total_pcf not like '%N/A%'
-group by id
-having count(*) = 1
-``` sql
-
-
+## SOME FINDINGS
+We will need to start creating questions to research this database. Here are 7 questions 
 question 1
 
 ``` sql
