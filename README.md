@@ -10,9 +10,9 @@ This project aims to analyze carbon emissions to examine the carbon footprint ac
 
 Our dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
 
-## TABLES INFORMATION
+## 1. TABLES INFORMATION
 
-**1. Table 'industry_group'**
+**1.1 Table 'industry_group'**
    
 | id | industry_group                                                         | 
 | -: | ---------------------------------------------------------------------: | 
@@ -47,7 +47,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 | 29 | Trading Companies & Distributors and Commercial Services & Supplies    | 
 | 30 | Utilities                                                              | 
 
-**2. Table 'companies'**
+**1.2. Table 'companies'**
 
 | id  | company_name                                   | 
 | --: | ---------------------------------------------: | 
@@ -197,7 +197,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 | 144 | Xerox Corporation                              | 
 | 145 | ZHEJIANG WANFENG AUTO WHEEL CO LTD             | 
 
-**3. Table 'countries'**
+**1.3. Table 'countries'**
 
 | id | country_name   | 
 | -: | -------------: | 
@@ -230,9 +230,12 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 | 27 | United Kingdom | 
 | 28 | USA            | 
 
-## SOME FINDINGS
+## 2. RESEARCH QUESTIONS AND DISCUSSION
 We will need to start creating questions to research this database. Here are 7 questions 
-question 1
+
+**Question 2.1: Which products contribute the most to carbon emissions?**
+
+The following query identifies the top 10 products contributing the highest total carbon emissions by summing up their carbon_footprint_pcf.
 
 ``` sql
 SELECT 
@@ -243,6 +246,9 @@ GROUP BY product_name
 ORDER BY total_emissions DESC
 LIMIT 10
 ```
+
+**Result**
+
 | product_name                                                                                                                       | total_emissions | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats                                                                                                       | 3718044         | 
@@ -256,8 +262,10 @@ LIMIT 10
 | Audi A6                                                                                                                            | 111282          | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | 100621          | 
 
-question 2
-``` sqp
+**Discussion:** Large-scale wind turbines dominate the list due to their significant production and life-cycle carbon footprints.
+
+***Question 2.2: What are the industry groups of these products?***
+``` sql
 SELECT 
     pe.product_name,
     ig.industry_group,
@@ -283,7 +291,7 @@ LIMIT 10
 | Audi A6                                                                                                                            | Automobiles & Components           | 111282          | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | Automobiles & Components           | 100621          | 
 
-question 3
+***Question 2.3: What are the industries with the highest contribution to carbon emissions?***
 
 ``` sql
 SELECT 
@@ -328,7 +336,7 @@ ORDER BY total_emissions DESC
 | Tobacco                                                                | 1               | 
 | Household & Personal Products                                          | 0               | 
 
-question 4
+***Question 2.4: What are the companies with the highest contribution to carbon emissions?***
 ``` sql
 SELECT 
     c.company_name,
@@ -353,7 +361,7 @@ LIMIT 10
 | "Lexmark International, Inc."           | 132012          | 
 | "Daikin Industries, Ltd."               | 105600          | 
 
-question 5
+***Question 2.5: What are the countries with the highest contribution to carbon emissions?***
 ``` sql
 SELECT 
     co.country_name,
@@ -378,7 +386,7 @@ LIMIT 10
 | Taiwan       | 62875           | 
 | India        | 24574           | 
 
-question 6
+***Question 2.6: What is the trend of carbon footprints (PCFs) over the years?***
 ``` sql
 SELECT 
     year,
@@ -396,7 +404,7 @@ ORDER BY year ASC;
 | 2016 | 1640182         | 
 | 2017 | 340271          | 
 
-question 7
+***Question 2.7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?***
 
 ``` sql
 WITH yearly_emissions AS (
@@ -458,3 +466,5 @@ ORDER BY emission_change ASC;
 | Utilities                                                              | 0               | 
 | Containers & Packaging                                                 | 0               | 
 | "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 0               | 
+
+## 3. CONCLUSION
