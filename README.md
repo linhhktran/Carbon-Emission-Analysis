@@ -262,9 +262,12 @@ LIMIT 10
 | Audi A6                                                                                                                            | 111282          | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | 100621          | 
 
-**Discussion:** Large-scale wind turbines dominate the list due to their significant production and life-cycle carbon footprints.
+**Discussion:** Large-scale wind turbines dominate the list, and while they are renewable energy generators, their production and manufacturing processes are responsible for a significant carbon footprint.
 
 ***Question 2.2: What are the industry groups of these products?***
+
+Using GROUP BY for industry groups after summing up total carbon emissions, giving a high-level view of which industries contribute the most.
+
 ``` sql
 SELECT 
     pe.product_name,
@@ -277,6 +280,7 @@ GROUP BY pe.product_name, ig.industry_group
 ORDER BY total_emissions DESC
 LIMIT 10
 ```
+**Result**
 
 | product_name                                                                                                                       | industry_group                     | total_emissions | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------: | --------------: | 
@@ -290,6 +294,8 @@ LIMIT 10
 | Electric Motor                                                                                                                     | Capital Goods                      | 140647          | 
 | Audi A6                                                                                                                            | Automobiles & Components           | 111282          | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | Automobiles & Components           | 100621          | 
+
+**Discussion:** Read the discussion in Question 2.3
 
 ***Question 2.3: What are the industries with the highest contribution to carbon emissions?***
 
@@ -335,6 +341,8 @@ ORDER BY total_emissions DESC
 | Semiconductors & Semiconductors Equipment                              | 3               | 
 | Tobacco                                                                | 1               | 
 | Household & Personal Products                                          | 0               | 
+
+**Discussion:** The Electrical Equipment and Machinery industry far exceeds others in carbon emissions, followed by Automobiles & Components and Materials, which mostly belong to heavy industry.
 
 ***Question 2.4: What are the companies with the highest contribution to carbon emissions?***
 ``` sql
