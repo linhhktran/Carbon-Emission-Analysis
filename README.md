@@ -12,7 +12,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 
 ## 1. TABLES INFORMATION
 
-**1.1. Table 'industry_group'**
+### **1.1. Table 'industry_group'**
    
 | id | industry_group                                                         | 
 | -: | ---------------------------------------------------------------------: | 
@@ -47,7 +47,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 | 29 | Trading Companies & Distributors and Commercial Services & Supplies    | 
 | 30 | Utilities                                                              | 
 
-**1.2. Table 'companies'**
+### **1.2. Table 'companies'**
 
 | id  | company_name                                   | 
 | --: | ---------------------------------------------: | 
@@ -197,7 +197,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 | 144 | Xerox Corporation                              | 
 | 145 | ZHEJIANG WANFENG AUTO WHEEL CO LTD             | 
 
-**1.3. Table 'countries'**
+### **1.3. Table 'countries'**
 
 | id | country_name   | 
 | -: | -------------: | 
