@@ -233,7 +233,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 ## 2. RESEARCH QUESTIONS AND DISCUSSION
 We will need to start creating questions to research this database. Here are 7 questions 
 
-**Question 2.1: Which products contribute the most to carbon emissions?**
+### **Question 2.1: Which products contribute the most to carbon emissions?**
 
 The following query identifies the top 10 products contributing the highest total carbon emissions by summing up their carbon_footprint_pcf.
 
@@ -264,7 +264,7 @@ LIMIT 10
 
 **Discussion:** Large-scale wind turbines dominate the list, and while they are renewable energy generators, their production and manufacturing processes are responsible for a significant carbon footprint.
 
-***Question 2.2: What are the industry groups of these products?***
+### ***Question 2.2: What are the industry groups of these products?***
 
 Associates total carbon emissions with industries by joining the industry-related columns (group id, industry name) between the 'industries' table and 'product_emissions', then groups data by product_name and industry_group to rank them. The industry_group_id in the 'product_emissions' table is the foreign key, linked to the primary key id in the 'industries' table.
 
@@ -310,6 +310,7 @@ LEFT JOIN industry_groups ig ON pe.industry_group_id = ig.id
 GROUP BY ig.industry_group
 ORDER BY total_emissions DESC
 ```
+**Result**
 
 | industry_group                                                         | total_emissions | 
 | ---------------------------------------------------------------------: | --------------: | 
@@ -346,7 +347,7 @@ ORDER BY total_emissions DESC
 
 **Discussion:** The Electrical Equipment and Machinery industry far exceeds others in carbon emissions, followed by Automobiles & Components and Materials, which mostly belong to heavy industry.
 
-***Question 2.4: What are the companies with the highest contribution to carbon emissions?***
+### ***Question 2.4: What are the companies with the highest contribution to carbon emissions?***
 
 Associates total carbon emissions with companies by joining the id between the 'companies' table and 'product_emissions', then groups data by company_name to rank them. The company_id in the 'product_emissions' table is the foreign key, linked to the primary key id in the 'companies' table.
 
@@ -378,7 +379,7 @@ LIMIT 10
 
 **Discussion:** Companies like Gamesa Corporación Tecnológica, S.A. and Daimler AG are significant contributors probably due to their production-intensive industries.
 
-***Question 2.5: What are the countries with the highest contribution to carbon emissions?***
+### ***Question 2.5: What are the countries with the highest contribution to carbon emissions?***
 
 Associates total carbon emissions with companies by joining the id between the 'countries' table and 'product_emissions', then groups data by country_name to rank them. The country_id in the 'product_emissions' table is the foreign key, linked to the primary key id in the 'countries' table.
 
@@ -409,7 +410,7 @@ LIMIT 10
 
 **Discussion:** Spain leads with the highest carbon footprint, possibly because it hosts major production facilities for high-emission products like wind turbines discussed in ***Question 2.1***.
 
-***Question 2.6: What is the trend of carbon footprints (PCFs) over the years?***
+### ***Question 2.6: What is the trend of carbon footprints (PCFs) over the years?***
 
 Tracks yearly emissions totals to understand trends over time. Therefore, we just need to use GROUP BY and ORDER BY year.
 
@@ -434,7 +435,7 @@ ORDER BY year ASC;
 
 **Discussion:** Emissions peaked in 2015, followed by a sharp decline. This could indicate a shift in production practices or regulation changes.
 
-***Question 2.7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?***
+### ***Question 2.7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?***
 
 Calculates the maximum and minimum emissions for each industry group over time and computes the difference to identify notable decreases.
 
