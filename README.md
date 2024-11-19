@@ -266,7 +266,7 @@ LIMIT 10
 
 ***Question 2.2: What are the industry groups of these products?***
 
-Using GROUP BY for industry groups after summing up total carbon emissions, giving a high-level view of which industries contribute the most.
+Associates total carbon emissions with industries by joining the industry-related columns (group id, industry name) between the 'industries' table and 'product_emissions', then groups data by product_name and industry_group to rank them. The industry_group_id in the 'product_emissions' table is the foreign key, linked to the primary key id in the 'industries' table.
 
 ``` sql
 SELECT 
@@ -298,6 +298,8 @@ LIMIT 10
 **Discussion:** Read the discussion in Question 2.3
 
 ***Question 2.3: What are the industries with the highest contribution to carbon emissions?***
+
+Same explanation as 2.2
 
 ``` sql
 SELECT 
@@ -345,6 +347,9 @@ ORDER BY total_emissions DESC
 **Discussion:** The Electrical Equipment and Machinery industry far exceeds others in carbon emissions, followed by Automobiles & Components and Materials, which mostly belong to heavy industry.
 
 ***Question 2.4: What are the companies with the highest contribution to carbon emissions?***
+
+Associates total carbon emissions with companies by joining the id between the 'companies' table and 'product_emissions', then groups data by company_name to rank them. The company_id in the 'product_emissions' table is the foreign key, linked to the primary key id in the 'companies' table.
+
 ``` sql
 SELECT 
     c.company_name,
@@ -355,6 +360,8 @@ GROUP BY c.company_name
 ORDER BY total_emissions DESC
 LIMIT 10
 ```
+
+**Result**
 
 | company_name                            | total_emissions | 
 | --------------------------------------: | --------------: | 
@@ -369,7 +376,12 @@ LIMIT 10
 | "Lexmark International, Inc."           | 132012          | 
 | "Daikin Industries, Ltd."               | 105600          | 
 
+**Discussion:** Companies like Gamesa Corporación Tecnológica, S.A. and Daimler AG are significant contributors probably due to their production-intensive industries.
+
 ***Question 2.5: What are the countries with the highest contribution to carbon emissions?***
+
+Associates total carbon emissions with companies by joining the id between the 'countries' table and 'product_emissions', then groups data by country_name to rank them. The country_id in the 'product_emissions' table is the foreign key, linked to the primary key id in the 'countries' table.
+
 ``` sql
 SELECT 
     co.country_name,
@@ -380,6 +392,7 @@ GROUP BY co.country_name
 ORDER BY total_emissions DESC
 LIMIT 10
 ```
+**Result**
 
 | country_name | total_emissions | 
 | -----------: | --------------: | 
@@ -394,7 +407,12 @@ LIMIT 10
 | Taiwan       | 62875           | 
 | India        | 24574           | 
 
+**Discussion:** Spain leads with the highest carbon footprint, possibly because it hosts major production facilities for high-emission products like wind turbines discussed in ***Question 2.1***.
+
 ***Question 2.6: What is the trend of carbon footprints (PCFs) over the years?***
+
+Tracks yearly emissions totals to understand trends over time. Therefore, we just need to use GROUP BY and ORDER BY year.
+
 ``` sql
 SELECT 
     year,
@@ -404,6 +422,8 @@ GROUP BY year
 ORDER BY year ASC;
 ```
 
+**Result**
+
 | year | total_emissions | 
 | ---: | --------------: | 
 | 2013 | 503857          | 
@@ -412,7 +432,11 @@ ORDER BY year ASC;
 | 2016 | 1640182         | 
 | 2017 | 340271          | 
 
+**Discussion:** Emissions peaked in 2015, followed by a sharp decline. This could indicate a shift in production practices or regulation changes.
+
 ***Question 2.7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?***
+
+Calculates the maximum and minimum emissions for each industry group over time and computes the difference to identify notable decreases.
 
 ``` sql
 WITH yearly_emissions AS (
@@ -441,6 +465,8 @@ SELECT
 FROM emission_change
 ORDER BY emission_change ASC;
 ```
+
+**Result**
 
 | industry_group                                                         | emission_change | 
 | ---------------------------------------------------------------------: | --------------: | 
@@ -475,4 +501,8 @@ ORDER BY emission_change ASC;
 | Containers & Packaging                                                 | 0               | 
 | "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 0               | 
 
+**Discussion:** Automobiles & Components shows the largest reduction, reflecting possible advancements in efficiency or adoption of greener technologies.
+
 ## 3. CONCLUSION
+
+The Electrical Equipment and Machinery industry leads in emissions, followed by Automobiles & Components and Materials. Wind turbines which belong to the Electrical Equipment and Machinery industry, despite being renewable energy sources, contribute significantly to emissions that could be due to their production processes. Automobiles like the Land Cruiser Prado and Audi A6 also highlight the automotive sector's environmental impact. Spain tops emissions, likely to be driven by wind turbine manufacturing, with Germany, Japan, and the USA following. Key contributors include Gamesa Corporación Tecnológica, S.A., and automotive giants Daimler AG and Volkswagen AG. Emissions peaked in 2015, with reductions possibly attributed to cleaner technologies and decarbonization efforts. Notably decreased emissions in Automobiles & Components reflect advancements in fuel efficiency and electrification, highlighting the importance of sustainable innovation across industries.
