@@ -297,7 +297,7 @@ LIMIT 10
 
 **Discussion:** Read the discussion in Question 2.3
 
-***Question 2.3: What are the industries with the highest contribution to carbon emissions?***
+### ***Question 2.3: What are the industries with the highest contribution to carbon emissions?***
 
 Same explanation as 2.2
 
@@ -506,4 +506,9 @@ ORDER BY emission_change ASC;
 
 ## 3. CONCLUSION
 
-The Electrical Equipment and Machinery industry leads in emissions, followed by Automobiles & Components and Materials. Wind turbines which belong to the Electrical Equipment and Machinery industry, despite being renewable energy sources, contribute significantly to emissions that could be due to their production processes. Automobiles like the Land Cruiser Prado and Audi A6 also highlight the automotive sector's environmental impact. Spain tops emissions, likely to be driven by wind turbine manufacturing, with Germany, Japan, and the USA following. Key contributors include Gamesa Corporación Tecnológica, S.A., and automotive giants Daimler AG and Volkswagen AG. Emissions peaked in 2015, with reductions possibly attributed to cleaner technologies and decarbonization efforts. Notably decreased emissions in Automobiles & Components reflect advancements in fuel efficiency and electrification, highlighting the importance of sustainable innovation across industries.
+* The Electrical Equipment and Machinery industry leads in emissions, followed by Automobiles & Components and Materials. 
+* Wind turbines which belong to the Electrical Equipment and Machinery industry, despite being renewable energy sources, contribute significantly to emissions that could be due to their production processes. Automobiles like the Land Cruiser Prado and Audi A6 also highlight the automotive sector's environmental impact. 
+* Spain tops emissions, likely to be driven by wind turbine manufacturing, with Germany, Japan, and the USA following. 
+* Key contributors include Gamesa Corporación Tecnológica, S.A., and automotive giants Daimler AG and Volkswagen AG. 
+* Emissions peaked in 2015, with reductions possibly attributed to cleaner technologies and decarbonization efforts. 
+* Notably decreased emissions in Automobiles & Components reflect advancements in fuel efficiency and electrification, highlighting the importance of sustainable innovation across industries.
