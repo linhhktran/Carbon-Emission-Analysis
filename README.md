@@ -12,7 +12,7 @@ Our dataset is compiled from publicly available data from nature.com and encompa
 
 ## 1. TABLES INFORMATION
 
-**1.1 Table 'industry_group'**
+**1.1. Table 'industry_group'**
    
 | id | industry_group                                                         | 
 | -: | ---------------------------------------------------------------------: | 
